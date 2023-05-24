@@ -1,0 +1,39 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 0 100px;
+}
+
+.header img {
+    width: 128px;
+    height: 128px;
+    border-radius: 12px;
+}
+
+.header section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.header section .email {
+    opacity: 0.6;
+}
+
+.username {
+    margin: 0;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 100px;
+}

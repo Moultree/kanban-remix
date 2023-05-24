@@ -1,0 +1,39 @@
+.main {
+    height: 80vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 50px 0 50px 100px;
+}
+
+.container .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.container .content h1 {
+    margin: 0;
+    font-size: 48px;
+}
+
+.container .content p {
+    max-width: 580px;
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.container .content .form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

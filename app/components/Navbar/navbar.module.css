@@ -1,0 +1,47 @@
+.link {
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 48px;
+    padding: 0 100px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.section a {
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    color: rgb(31 24 24 / 60%);
+
+    transition: 100ms;
+}
+
+.section a:hover {
+    color: rgb(31 24 24 / 100%);
+}
+
+.buttons {
+    gap: 20px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+
+    text-decoration: none;
+    color: rgb(31 24 24 / 100%);
+}

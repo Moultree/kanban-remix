@@ -1,0 +1,195 @@
+@font-face {
+    font-family: 'LensGrotesk-Book';
+    src: url('LensGrotesk-Book.eot');
+    src: local('Lens Grotesk Book'), local('LensGrotesk-Book'),
+        url('LensGrotesk-Book.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-Book.woff2') format('woff2'),
+        url('LensGrotesk-Book.woff') format('woff'),
+        url('LensGrotesk-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-BoldItalic.eot');
+    src: local('Lens Grotesk Bold Italic'), local('LensGrotesk-BoldItalic'),
+        url('LensGrotesk-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-BoldItalic.woff2') format('woff2'),
+        url('LensGrotesk-BoldItalic.woff') format('woff'),
+        url('LensGrotesk-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk-BookItalic';
+    src: url('LensGrotesk-BookItalic.eot');
+    src: local('Lens Grotesk Book Italic'), local('LensGrotesk-BookItalic'),
+        url('LensGrotesk-BookItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-BookItalic.woff2') format('woff2'),
+        url('LensGrotesk-BookItalic.woff') format('woff'),
+        url('LensGrotesk-BookItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-Bold.eot');
+    src: local('Lens Grotesk Bold'), local('LensGrotesk-Bold'),
+        url('LensGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-Bold.woff2') format('woff2'),
+        url('LensGrotesk-Bold.woff') format('woff'),
+        url('LensGrotesk-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGroteskW05';
+    src: url('LensGroteskW05-Regular.eot');
+    src: local('Lens Grotesk W05 Regular'), local('LensGroteskW05-Regular'),
+        url('LensGroteskW05-Regular.eot?#iefix') format('embedded-opentype'),
+        url('LensGroteskW05-Regular.woff2') format('woff2'),
+        url('LensGroteskW05-Regular.woff') format('woff'),
+        url('LensGroteskW05-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-ExtraLightItalic.eot');
+    src: local('Lens Grotesk Extra Light Italic'), local('LensGrotesk-ExtraLightItalic'),
+        url('LensGrotesk-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-ExtraLightItalic.woff2') format('woff2'),
+        url('LensGrotesk-ExtraLightItalic.woff') format('woff'),
+        url('LensGrotesk-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-Medium.eot');
+    src: local('Lens Grotesk Medium'), local('LensGrotesk-Medium'),
+        url('LensGrotesk-Medium.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-Medium.woff2') format('woff2'),
+        url('LensGrotesk-Medium.woff') format('woff'),
+        url('LensGrotesk-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-ExtraLight.eot');
+    src: local('Lens Grotesk Extra Light'), local('LensGrotesk-ExtraLight'),
+        url('LensGrotesk-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-ExtraLight.woff2') format('woff2'),
+        url('LensGrotesk-ExtraLight.woff') format('woff'),
+        url('LensGrotesk-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-Light.eot');
+    src: local('Lens Grotesk Light'), local('LensGrotesk-Light'),
+        url('LensGrotesk-Light.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-Light.woff2') format('woff2'),
+        url('LensGrotesk-Light.woff') format('woff'),
+        url('LensGrotesk-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-LightItalic.eot');
+    src: local('Lens Grotesk Light Italic'), local('LensGrotesk-LightItalic'),
+        url('LensGrotesk-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-LightItalic.woff2') format('woff2'),
+        url('LensGrotesk-LightItalic.woff') format('woff'),
+        url('LensGrotesk-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-MediumItalic.eot');
+    src: local('Lens Grotesk Medium Italic'), local('LensGrotesk-MediumItalic'),
+        url('LensGrotesk-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-MediumItalic.woff2') format('woff2'),
+        url('LensGrotesk-MediumItalic.woff') format('woff'),
+        url('LensGrotesk-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-Thin.eot');
+    src: local('Lens Grotesk Thin'), local('LensGrotesk-Thin'),
+        url('LensGrotesk-Thin.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-Thin.woff2') format('woff2'),
+        url('LensGrotesk-Thin.woff') format('woff'),
+        url('LensGrotesk-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-SemiBoldItalic.eot');
+    src: local('Lens Grotesk Semi Bold Italic'), local('LensGrotesk-SemiBoldItalic'),
+        url('LensGrotesk-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-SemiBoldItalic.woff2') format('woff2'),
+        url('LensGrotesk-SemiBoldItalic.woff') format('woff'),
+        url('LensGrotesk-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-ThinItalic.eot');
+    src: local('Lens Grotesk Thin Italic'), local('LensGrotesk-ThinItalic'),
+        url('LensGrotesk-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-ThinItalic.woff2') format('woff2'),
+        url('LensGrotesk-ThinItalic.woff') format('woff'),
+        url('LensGrotesk-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LensGrotesk';
+    src: url('LensGrotesk-SemiBold.eot');
+    src: local('Lens Grotesk Semi Bold'), local('LensGrotesk-SemiBold'),
+        url('LensGrotesk-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('LensGrotesk-SemiBold.woff2') format('woff2'),
+        url('LensGrotesk-SemiBold.woff') format('woff'),
+        url('LensGrotesk-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

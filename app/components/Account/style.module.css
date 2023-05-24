@@ -1,0 +1,70 @@
+.wrapper,
+.big {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    max-height: 48px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: 100ms;
+}
+
+.span {
+    height: min-content;
+}
+
+.wrapper a,
+.big a {
+    color: rgba(31, 24, 24, 0.6);
+}
+
+.wrapper img,
+.big img {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+}
+
+.wrapper section,
+.big section {
+    transform: translateY(-5px);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 120px;
+}
+
+.wrapper section .username,
+.big section .username {
+    transform: translateY(10px);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.wrapper section .email,
+.big section .email {
+    font-size: 12px;
+    opacity: 0.6;
+    transition: 100ms;
+}
+
+.wrapper:hover,
+.big:hover {
+    background: rgba(31, 24, 24, 0.1);
+}
+
+.wrapper:hover > section a,
+.big:hover > section a {
+    color: #1f1818;
+}
+
+.wrapper:hover > section a .email,
+.big:hover > section a .email {
+    opacity: 1;
+}

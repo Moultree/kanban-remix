@@ -1,0 +1,40 @@
+h1 {
+    margin: 0;
+}
+
+.tile {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: 100ms;
+    box-sizing: border-box;
+    width: 100%; /* Set tile width to 100% of parent */
+}
+
+.tile section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tile section .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.tile:hover {
+    background: rgba(0, 0, 0, 0.05);
+}

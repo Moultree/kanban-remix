@@ -1,0 +1,13 @@
+.setting h3 {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    margin: 0;
+}
+
+.setting form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
