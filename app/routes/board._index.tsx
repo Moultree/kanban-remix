@@ -2,7 +2,7 @@ import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Button, Navbar } from "~/components";
+import { Navbar } from "~/components";
 import { getSession } from "../sessions";
 import type { IBoard, IUser } from "~/interfaces";
 import Account from "~/components/Account";
@@ -10,10 +10,10 @@ import BoardTile from "~/components/BoardTile";
 import styles from "~/styles/boards.module.css";
 
 export const meta: V2_MetaFunction = () => {
-    return [{ title: "Boards" }, { favicon: "📋" }];
+    return [{ title: "Boards" }];
 };
 
-const boardsLoader = async ({ request }: LoaderArgs) => {
+const loader = async ({ request }: LoaderArgs) => {
     const session = await getSession(request.headers.get("Cookie"));
 
     if (!session.has("token")) {
@@ -58,8 +58,36 @@ const boardsLoader = async ({ request }: LoaderArgs) => {
     return json<UserAndBoards>({ user, boards });
 };
 
+const action = async ({ request, params }: LoaderArgs) => {
+    const session = await getSession(request.headers.get("Cookie"));
+
+    if (!session.has("token")) {
+        return redirect("/login");
+    }
+
+    const data = await request.formData();
+    const { _action } = Object.fromEntries(data);
+
+    if (_action === "newBoard") {
+        const response = await fetch("http://localhost:8080/api/board/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                cookie: `token=${session.get("token")}`,
+            },
+            body: JSON.stringify({
+                name: (await request.formData()).get("name")!,
+                authorId: session.get("user")?.id,
+            }),
+            credentials: "include",
+        });
+    }
+
+    return redirect(".");
+};
+
 const Boards = () => {
-    const { user, boards } = useLoaderData<typeof boardsLoader>();
+    const { user, boards } = useLoaderData<typeof loader>();
 
     return (
         <main className={styles.main}>
@@ -73,17 +101,17 @@ const Boards = () => {
                         <BoardTile
                             key={board.id}
                             id={board.id}
-                            icon="📋"
+                            icon={board.emoji}
                             name={board.name}
                             isOwner={board.authorId == user.id}
                         />
                     ))}
+                    <BoardTile editing />
                 </div>
-                <Button>New</Button>
             </div>
         </main>
     );
 };
 
-export { boardsLoader as loader };
+export { loader, action };
 export default Boards;
