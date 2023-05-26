@@ -45,6 +45,44 @@ h1 {
     cursor: default;
 }
 
+.page .header {
+    cursor: default;
+}
+
+.page .icon {
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.page .icon:hover > img {
+    opacity: 0.6;
+}
+
 .page:hover {
     background: inherit;
+}
+
+.picker {
+    display: none;
+    z-index: 2;
+    position: relative;
+    top: 260px;
+    left: 140px;
+}
+
+.new {
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(31 24 24 / 100%);
+    background: none;
+}
+
+.new:focus {
+    outline: none;
+    border: none;
+}
+
+.editing header {
+    opacity: 0.6;
 }
