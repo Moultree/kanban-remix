@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./style.module.css";
 import { Form, Link } from "@remix-run/react";
-import type { User } from "~/interfaces";
+import type { IUser } from "~/interfaces";
 import Button from "../Button";
 
 const Account = (props: AccountProps) => {
+    const itemRef = useRef(null);
+    const [itemWidth, setItemWidth] = useState(-1);
+
     const [text, setText] = useState(props.user.email);
+
+    useEffect(() => {
+        if (itemRef.current) {
+            setItemWidth(
+                Number.parseInt(window.getComputedStyle(itemRef.current).width)
+            );
+        }
+    }, []);
 
     return (
         <>
@@ -14,6 +25,8 @@ const Account = (props: AccountProps) => {
                 className={styles.wrapper}
                 onMouseOver={() => setText("Go to settings")}
                 onMouseLeave={() => setText(props.user.email)}
+                ref={itemRef}
+                style={{ width: itemWidth }}
             >
                 <img src={props.user.avatarUrl} alt="Avatar" />
                 <section>
@@ -36,7 +49,7 @@ const Account = (props: AccountProps) => {
 };
 
 interface AccountProps {
-    user: User;
+    user: IUser;
 }
 
 export default Account;
