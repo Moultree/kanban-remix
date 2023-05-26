@@ -4,7 +4,6 @@ import { Form, Link, useSearchParams } from "@remix-run/react";
 import { useState } from "react";
 import { Button, Input, Navbar } from "~/components";
 import styles from "~/styles/auth.module.css";
-import { getSession, commitSession } from "../sessions";
 
 export const meta: V2_MetaFunction = () => {
     return [{ title: "Sign up" }];
@@ -24,23 +23,12 @@ export async function action({ request }: ActionArgs) {
         }),
     });
 
-    const cookieHeader = response.headers.get("token");
-
-    if (!response.ok || !cookieHeader) {
-        console.error("Error logging in");
-        return;
+    if (!response.ok) {
+        console.log(response);
+        return null;
     }
 
-    const session = await getSession(request.headers.get("Cookie"));
-
-    session.set("token", cookieHeader.split(";")[0].split("=")[1]);
-    session.set("user", await response.json());
-
-    return redirect("/board", {
-        headers: {
-            "Set-Cookie": await commitSession(session),
-        },
-    });
+    return redirect("/login");
 }
 
 const Signup = () => {
@@ -77,7 +65,7 @@ const Signup = () => {
                     placeholder="Password"
                 />
                 <Button type="submit" style={{ width: "100%" }}>
-                    Log in
+                    Sign up
                 </Button>
             </Form>
             <p className={styles.p}>
