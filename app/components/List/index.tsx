@@ -1,4 +1,6 @@
+import type { ICard } from "~/interfaces";
 import styles from "./style.module.css";
+import Card from "../Card";
 
 const List = (props: ListProps) => {
     return (
@@ -13,6 +15,11 @@ const List = (props: ListProps) => {
                 ></div>
                 {props.name}
             </header>
+            {props.cards
+                ?.sort((a, b) => a.position - b.position)
+                .map((card) => (
+                    <Card key={card.id} card={card}></Card>
+                ))}
         </section>
     );
 };
@@ -20,6 +27,7 @@ const List = (props: ListProps) => {
 interface ListProps {
     id: number;
     name: string;
+    cards?: ICard[];
     color?: string;
     dotColor?: string;
 }

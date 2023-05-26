@@ -4,7 +4,7 @@ import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 import { redirect } from "react-router";
 import { Account, BoardTile, List, Navbar } from "~/components";
-import type { IUser, IBoard } from "~/interfaces";
+import type { IUser, IBoard, IList, ICard } from "~/interfaces";
 import { getSession } from "~/sessions";
 import styles from "~/styles/board.module.css";
 
@@ -15,6 +15,8 @@ export const meta: V2_MetaFunction = () => {
 type BoardData = {
     user: IUser;
     board: IBoard;
+    lists: IList[];
+    cards: ICard[][];
 };
 
 const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
@@ -34,6 +36,39 @@ const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
     }
 
     return boardResponse.json();
+};
+
+const loadLists = async (cookie: string, boardId: string): Promise<IList[]> => {
+    const listsResponse = await fetch(
+        `http://localhost:8080/api/list/board/${boardId}`,
+        {
+            method: "GET",
+            headers: {
+                cookie: cookie,
+            },
+            credentials: "include",
+        }
+    );
+
+    return listsResponse.json();
+};
+
+const loadCards = async (
+    cookie: string,
+    listId: string | number
+): Promise<ICard[]> => {
+    const cardsResponse = await fetch(
+        `http://localhost:8080/api/card/list/${listId}`,
+        {
+            method: "GET",
+            headers: {
+                cookie: cookie,
+            },
+            credentials: "include",
+        }
+    );
+
+    return cardsResponse.json();
 };
 
 const loadUser = async (cookie: string): Promise<IUser> => {
@@ -64,11 +99,17 @@ const loader = async ({ request, params }: LoaderArgs) => {
         session.get("user") ||
         (await loadUser(`token=${session.get("token")}`));
 
-    if (!user) {
-        throw new Error();
+    let lists = await loadLists(
+        `token=${session.get("token")}`,
+        params.boardId!
+    );
+
+    let cards = [];
+    for (const list of lists) {
+        cards.push(await loadCards(`token=${session.get("token")}`, list.id));
     }
 
-    return json<BoardData>({ user, board });
+    return json<BoardData>({ user, board, lists, cards });
 };
 
 const action = async ({ request, params }: LoaderArgs) => {
@@ -97,10 +138,31 @@ const action = async ({ request, params }: LoaderArgs) => {
             throw new Error();
         }
     }
+
+    if (_action === "setEmoji") {
+        const response = await fetch(
+            `http://localhost:8080/api/board/${params.boardId}`,
+            {
+                method: "PUT",
+                headers: {
+                    cookie: `token=${session.get("token")}`,
+                },
+                body: JSON.stringify({
+                    emoji: formData.get("emoji"),
+                }),
+                cache: "reload",
+            }
+        );
+
+        console.log(response);
+    }
+
+    return redirect(".");
 };
 
 const BoardPage = () => {
-    const { user, board }: BoardData = useLoaderData<typeof loader>();
+    const { user, board, lists, cards }: BoardData =
+        useLoaderData<typeof loader>();
 
     return (
         <main>
@@ -113,28 +175,18 @@ const BoardPage = () => {
                     id={board.id}
                     name={board.name}
                     isOwner={user.id == board.authorId}
+                    icon={board.emoji}
                     asHeader
                 ></BoardTile>
                 <div className={styles.lists}>
-                    <List id={1} name={"Not started"}></List>
-                    <List
-                        id={2}
-                        name={"In progress"}
-                        color="#D3E5EF"
-                        dotColor="#5B97BD"
-                    ></List>
-                    <List
-                        id={3}
-                        name={"Testing"}
-                        color="#F5E0E9"
-                        dotColor="#CD749F"
-                    ></List>
-                    <List
-                        id={4}
-                        name={"Done"}
-                        color="#DBEDDB"
-                        dotColor="#6C9B7D"
-                    ></List>
+                    {lists.map((list, index) => (
+                        <List
+                            key={list.id}
+                            id={list.id}
+                            name={list.name}
+                            cards={cards[index]}
+                        ></List>
+                    ))}
                 </div>
             </div>
         </main>
