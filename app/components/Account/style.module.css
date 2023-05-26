@@ -1,14 +1,18 @@
 .wrapper,
 .big {
     cursor: pointer;
+
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
+
     max-height: 48px;
     padding: 5px 10px;
+
     border-radius: 6px;
+
     transition: 100ms;
 }
 
@@ -18,7 +22,7 @@
 
 .wrapper a,
 .big a {
-    color: rgba(31, 24, 24, 0.6);
+    color: rgb(31 24 24 / 60%);
 }
 
 .wrapper img,
@@ -31,20 +35,22 @@
 .wrapper section,
 .big section {
     transform: translateY(-5px);
+
     display: flex;
     flex-direction: column;
     gap: 0;
     align-items: flex-start;
     justify-content: flex-start;
+
     min-width: 120px;
 }
 
 .wrapper section .username,
 .big section .username {
     transform: translateY(10px);
+    margin: 0;
     font-size: 16px;
     font-weight: 600;
-    margin: 0;
 }
 
 .wrapper section .email,
@@ -56,7 +62,7 @@
 
 .wrapper:hover,
 .big:hover {
-    background: rgba(31, 24, 24, 0.1);
+    background: rgb(31 24 24 / 10%);
 }
 
 .wrapper:hover > section a,

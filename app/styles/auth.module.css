@@ -1,12 +1,11 @@
 .main {
-    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 80vh;
 }
 
 .form {
-    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -14,6 +13,7 @@
     justify-content: center;
 
     max-width: 400px;
+    height: 100%;
 }
 
 .p {

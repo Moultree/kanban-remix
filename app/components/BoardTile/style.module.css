@@ -1,19 +1,23 @@
 h1 {
-    font-size: 24px;
     margin: 0;
+    font-size: 24px;
 }
 
 .tile {
     cursor: pointer;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px;
-    border-radius: 6px;
-    transition: 100ms;
+
     box-sizing: border-box;
     width: 100%; /* Set tile width to 100% of parent */
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    transition: 100ms;
 }
 
 .tile section,
@@ -29,16 +33,19 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 48px;
     height: 48px;
+
     text-align: center;
-    background: rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+
+    background: rgb(0 0 0 / 2%);
+    border: 1px solid rgb(0 0 0 / 20%);
     border-radius: 6px;
 }
 
 .tile:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgb(0 0 0 / 5%);
 }
 
 .page {
@@ -49,7 +56,7 @@ h1 {
     cursor: default;
 }
 
-.page .icon {
+.page .header .icon {
     cursor: pointer;
     transition: 100ms;
 }
@@ -63,24 +70,26 @@ h1 {
 }
 
 .picker {
-    display: none;
-    z-index: 2;
     position: relative;
+    z-index: 2;
     top: 260px;
     left: 140px;
+
+    display: none;
 }
 
 .new {
-    border: none;
     font-size: 24px;
     font-weight: bold;
     color: rgb(31 24 24 / 100%);
+
     background: none;
+    border: none;
 }
 
 .new:focus {
-    outline: none;
     border: none;
+    outline: none;
 }
 
 .editing header {

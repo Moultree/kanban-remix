@@ -7,18 +7,21 @@
 .container {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-items: flex-start;
     justify-content: flex-start;
+
     padding: 0 100px;
-    gap: 10px;
 }
 
 .boards {
-    width: 100%;
-    box-sizing: border-box;
     position: relative;
+
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    box-sizing: border-box;
+    width: 100%;
     padding: 0 50px;
 }
