@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { Account, Button, Input, Navbar } from "~/components";
-import type { User } from "~/interfaces";
+import type { IUser } from "~/interfaces";
 import { getSession } from "~/sessions";
 import styles from "~/styles/_index.module.css";
 
@@ -25,7 +25,7 @@ const loader = async ({ request }: ActionArgs) => {
         },
     });
 
-    return json<User>(await response.json());
+    return json<IUser>(await response.json());
 };
 
 const Index = () => {

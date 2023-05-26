@@ -1,9 +1,9 @@
 import { createCookieSessionStorage } from "@remix-run/node";
-import type { User } from "./interfaces";
+import type { IUser } from "./interfaces";
 
 type SessionData = {
     token: string;
-    user?: User;
+    user?: IUser;
 };
 
 type SessionFlashData = {

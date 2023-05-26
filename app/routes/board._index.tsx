@@ -4,7 +4,7 @@ import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Button, Navbar } from "~/components";
 import { getSession } from "../sessions";
-import type { Board, User } from "~/interfaces";
+import type { IBoard, IUser } from "~/interfaces";
 import Account from "~/components/Account";
 import BoardTile from "~/components/BoardTile";
 import styles from "~/styles/boards.module.css";
@@ -51,8 +51,8 @@ const boardsLoader = async ({ request }: LoaderArgs) => {
     }
 
     type UserAndBoards = {
-        user: User;
-        boards: Board[];
+        user: IUser;
+        boards: IBoard[];
     };
 
     return json<UserAndBoards>({ user, boards });

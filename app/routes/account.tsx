@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import type { ActionArgs, LoaderArgs } from "@remix-run/server-runtime";
 import { redirect, json } from "react-router";
 import { Account, Navbar, UserSetting } from "~/components";
-import type { User } from "~/interfaces";
+import type { IUser } from "~/interfaces";
 import { getSession, commitSession } from "~/sessions";
 import styles from "~/styles/account.module.css";
 
@@ -38,7 +38,7 @@ const action = async ({ request }: ActionArgs) => {
         return;
     }
 
-    const user: User = await response.json();
+    const user: IUser = await response.json();
 
     session.set("user", user);
 
@@ -64,7 +64,7 @@ const loader = async ({ request }: LoaderArgs) => {
         cache: "reload",
     });
 
-    return json<User>(await response.json());
+    return json<IUser>(await response.json());
 };
 
 const AccountPage = () => {
