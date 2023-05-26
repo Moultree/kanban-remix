@@ -1,26 +1,38 @@
 import Button from "../Button";
 import styles from "./style.module.css";
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 
 const BoardTile: React.FC<BoardTileProps> = (props: BoardTileProps) => {
     return (
-        <Link className={styles.tile} to={`/board/${props.id}`}>
-            <section className={styles.header}>
+        <div className={`${styles.tile} ${props.asHeader ? styles.page : ""}`}>
+            <Link
+                className={styles.header}
+                to={props.asHeader ? "." : `/board/${props.id}`}
+            >
                 <div className={styles.icon}>{props.icon ?? "📋"}</div>
                 <h1>{props.editing ? <input></input> : props.name}</h1>
-            </section>
+            </Link>
             {props.editing ? null : (
                 <section className={styles.buttons}>
-                    <Button mini>
-                        <img src="/person.plus.svg" alt="Invite" />
-                        Invite
-                    </Button>
-                    <Button mini>
-                        <img src="/trash.svg" alt="Delete" />
-                    </Button>
+                    <Form>
+                        <Button mini>
+                            <img src="/person.plus.svg" alt="Invite" />
+                            Invite
+                        </Button>
+                    </Form>
+                    <Form action={`/board/${props.id}`} method="DELETE">
+                        <Button
+                            mini
+                            name="_action"
+                            value="DELETE"
+                            aria-label="delete"
+                        >
+                            <img src="/trash.svg" alt="Delete" />
+                        </Button>
+                    </Form>
                 </section>
             )}
-        </Link>
+        </div>
     );
 };
 
@@ -30,6 +42,7 @@ interface BoardTileProps {
     name: string;
     isOwner: boolean;
     editing?: boolean;
+    asHeader?: boolean;
 }
 
 export default BoardTile;
