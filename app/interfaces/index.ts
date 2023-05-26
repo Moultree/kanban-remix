@@ -8,8 +8,9 @@ export interface IUser {
 
 export interface IBoard {
     id: number;
-    authorId: number;
     name: string;
+    authorId: number;
+    emoji: string;
     invitedUsers?: Array<IUser>;
 }
 
@@ -17,8 +18,9 @@ export interface ICard {
     id: number;
     title: string;
     description: string;
+    emoji: string;
     position: number;
-    assigneeId: number;
+    assignee: string;
     listId: number;
 }
 
