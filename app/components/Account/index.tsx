@@ -28,7 +28,10 @@ const Account = (props: AccountProps) => {
                 ref={itemRef}
                 style={{ width: itemWidth }}
             >
-                <img src={props.user.avatarUrl} alt="Avatar" />
+                <img
+                    src={props.user.avatarUrl ?? "/placeholder.png"}
+                    alt="Avatar"
+                />
                 <section>
                     <span className={styles.username}>
                         {props.user.username}

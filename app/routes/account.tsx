@@ -17,7 +17,6 @@ const action = async ({ request }: ActionArgs) => {
     const body = await request.formData();
 
     const entry: Array<string> = body.entries().next().value;
-    console.log({ [entry[0]]: entry[1] });
 
     if (!session.has("token")) {
         return redirect("/login");
@@ -77,7 +76,10 @@ const AccountPage = () => {
                 <Account user={user}></Account>
             </Navbar>
             <header className={styles.header}>
-                <img src={user.avatarUrl} alt="Avatar" />
+                <img
+                    src={user.avatarUrl ?? "/placeholder_big.png"}
+                    alt="Avatar"
+                />
                 <section>
                     <h2 className={styles.username}>{user.username}</h2>
                     <span className={styles.email}>{user.email}</span>
