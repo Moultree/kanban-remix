@@ -20,7 +20,7 @@ export interface ICard {
     description: string;
     emoji: string;
     position: number;
-    assignee: string;
+    assigneeId: number;
     listId: number;
 }
 
