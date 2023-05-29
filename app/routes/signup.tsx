@@ -24,7 +24,6 @@ export async function action({ request }: ActionArgs) {
     });
 
     if (!response.ok) {
-        console.log(response);
         return null;
     }
 
