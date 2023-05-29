@@ -66,17 +66,16 @@ const action = async ({ request, params }: LoaderArgs) => {
     }
 
     const data = await request.formData();
-    const { _action } = Object.fromEntries(data);
 
-    if (_action === "newBoard") {
-        const response = await fetch("http://localhost:8080/api/board/", {
+    if (request.method == "POST") {
+        await fetch("http://localhost:8080/api/board/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 cookie: `token=${session.get("token")}`,
             },
             body: JSON.stringify({
-                name: (await request.formData()).get("name")!,
+                name: data.get("name")!,
                 authorId: session.get("user")?.id,
             }),
             credentials: "include",
