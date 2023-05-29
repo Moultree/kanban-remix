@@ -1,10 +1,24 @@
-import type { ICard } from "~/interfaces";
+import type { ICard, IUser } from "~/interfaces";
 import styles from "./style.module.css";
 import Card from "../Card";
+import { useDroppable } from "@dnd-kit/core";
 
 const List = (props: ListProps) => {
+    const { isOver, setNodeRef } = useDroppable({
+        id: `list${props.id}`,
+        data: {
+            listId: props.id,
+        },
+    });
+
+    const style = isOver
+        ? {
+              background: "rgb(0 0 0 / 5%)",
+          }
+        : undefined;
+
     return (
-        <section className={styles.list}>
+        <section className={styles.list} ref={setNodeRef} style={style}>
             <header
                 className={styles.badge}
                 style={props.color ? { background: props.color } : {}}
@@ -15,11 +29,13 @@ const List = (props: ListProps) => {
                 ></div>
                 {props.name}
             </header>
-            {props.cards
-                ?.sort((a, b) => a.position - b.position)
-                .map((card) => (
-                    <Card key={card.id} card={card}></Card>
-                ))}
+            {props.cardsWithAssignee.map((cardWithAssignee) => (
+                <Card
+                    key={cardWithAssignee.card.id}
+                    card={cardWithAssignee.card}
+                    assignee={cardWithAssignee.assignee}
+                ></Card>
+            ))}
         </section>
     );
 };
@@ -27,7 +43,7 @@ const List = (props: ListProps) => {
 interface ListProps {
     id: number;
     name: string;
-    cards?: ICard[];
+    cardsWithAssignee: { assignee: IUser | null; card: ICard }[];
     color?: string;
     dotColor?: string;
 }
