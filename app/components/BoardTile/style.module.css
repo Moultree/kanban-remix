@@ -30,6 +30,8 @@ h1 {
 }
 
 .tile .header .icon {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,10 +72,10 @@ h1 {
 }
 
 .picker {
-    position: relative;
-    z-index: 2;
-    top: 260px;
-    left: 140px;
+    position: absolute;
+    z-index: 999;
+    top: 50px;
+    left: 0;
 
     display: none;
 }
