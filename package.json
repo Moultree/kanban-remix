@@ -8,6 +8,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
     "@remix-run/css-bundle": "^1.16.1",
     "@remix-run/node": "^1.16.1",
     "@remix-run/react": "^1.16.1",
@@ -15,7 +17,9 @@
     "emoji-picker-react": "^4.4.9",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
+    "react-contenteditable": "^3.3.7",
     "react-dom": "^18.2.0",
+    "sanitize-html": "^2.10.0",
     "sass": "^1.62.1",
     "stylelint-config-clean-order": "^5.0.1",
     "stylelint-config-css-modules": "^4.2.0",
@@ -27,6 +31,7 @@
     "@remix-run/eslint-config": "^1.16.1",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.0.11",
+    "@types/sanitize-html": "^2.9.0",
     "eslint": "^8.38.0",
     "stylelint": "^15.6.2",
     "stylelint-config-standard": "^33.0.0",
