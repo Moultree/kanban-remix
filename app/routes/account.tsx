@@ -22,15 +22,18 @@ const action = async ({ request }: ActionArgs) => {
         return redirect("/login");
     }
 
-    const response = await fetch("http://localhost:8080/api/account/me", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            cookie: `token=${session.get("token")}`,
-        },
-        body: JSON.stringify({ [entry[0]]: entry[1] }),
-        cache: "reload",
-    });
+    const response = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                cookie: `token=${session.get("token")}`,
+            },
+            body: JSON.stringify({ [entry[0]]: entry[1] }),
+            cache: "reload",
+        }
+    );
 
     if (!response.ok) {
         console.error("Error changing field:", entry[0]);
@@ -55,13 +58,16 @@ const loader = async ({ request }: LoaderArgs) => {
         return redirect("/login");
     }
 
-    const response = await fetch("http://localhost:8080/api/account/me", {
-        method: "GET",
-        headers: {
-            cookie: `token=${session.get("token")}`,
-        },
-        cache: "reload",
-    });
+    const response = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        {
+            method: "GET",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+            },
+            cache: "reload",
+        }
+    );
 
     return json<IUser>(await response.json());
 };

@@ -12,16 +12,19 @@ export const meta: V2_MetaFunction = () => {
 
 export async function action({ request }: ActionArgs) {
     const body = await request.formData();
-    const response = await fetch("http://localhost:8080/api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username: body.get("username"),
-            password: body.get("password"),
-        }),
-    });
+    const response = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/login",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: body.get("username"),
+                password: body.get("password"),
+            }),
+        }
+    );
 
     const cookieHeader = response.headers.get("token");
 

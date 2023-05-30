@@ -29,7 +29,7 @@ const loadUserById = async (
     userId: number | string
 ): Promise<IUser> => {
     const response = await fetch(
-        `http://localhost:8080/api/account/${userId}`,
+        `https://kanban-production-9b8e.up.railway.app/api/account/${userId}`,
         {
             method: "GET",
             headers: {
@@ -44,7 +44,7 @@ const loadUserById = async (
 
 const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
     const boardResponse = await fetch(
-        `http://localhost:8080/api/board/${boardId}`,
+        `https://kanban-production-9b8e.up.railway.app/api/board/${boardId}`,
         {
             method: "GET",
             headers: {
@@ -64,7 +64,7 @@ const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
 
 const loadLists = async (cookie: string, boardId: string): Promise<IList[]> => {
     const listsResponse = await fetch(
-        `http://localhost:8080/api/list/board/${boardId}`,
+        `https://kanban-production-9b8e.up.railway.app/api/list/board/${boardId}`,
         {
             method: "GET",
             headers: {
@@ -83,7 +83,7 @@ const loadCards = async (
     listId: string | number
 ): Promise<ICard[]> => {
     const cardsResponse = await fetch(
-        `http://localhost:8080/api/card/list/${listId}`,
+        `https://kanban-production-9b8e.up.railway.app/api/card/list/${listId}`,
         {
             method: "GET",
             headers: {
@@ -98,13 +98,16 @@ const loadCards = async (
 };
 
 const loadUser = async (cookie: string): Promise<IUser> => {
-    const userResponse = await fetch("http://localhost:8080/api/account/me", {
-        method: "GET",
-        headers: {
-            cookie: cookie,
-        },
-        cache: "reload",
-    });
+    const userResponse = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        {
+            method: "GET",
+            headers: {
+                cookie: cookie,
+            },
+            cache: "reload",
+        }
+    );
 
     return userResponse.json();
 };
@@ -131,10 +134,8 @@ const loader = async ({ request, params }: LoaderArgs) => {
     );
 
     let cardsWithAssignee = [];
-    console.log(lists);
     for (const list of lists) {
         let cards = await loadCards(`token=${session.get("token")}`, list.id);
-        console.log(cards);
         let listCards = [];
 
         for (const card of cards) {
@@ -171,12 +172,13 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "delete") {
         const response = await fetch(
-            `http://localhost:8080/api/board/${params.boardId}`,
+            `https://kanban-production-9b8e.up.railway.app/api/board/${params.boardId}`,
             {
                 method: "DELETE",
                 headers: {
                     cookie: `token=${session.get("token")}`,
                 },
+                credentials: "include",
                 cache: "reload",
             }
         );
@@ -184,24 +186,31 @@ const action = async ({ request, params }: LoaderArgs) => {
         if (!response.ok) {
             throw new Error();
         }
+
+        return redirect("/board");
     }
 
     if (_action === "setEmoji") {
-        await fetch(`http://localhost:8080/api/board/${params.boardId}`, {
-            method: "PUT",
-            headers: {
-                cookie: `token=${session.get("token")}`,
-            },
-            body: JSON.stringify({
-                emoji: formData.get("emoji"),
-            }),
-            cache: "reload",
-        });
+        await fetch(
+            `https://kanban-production-9b8e.up.railway.app/api/board/${params.boardId}`,
+            {
+                method: "PUT",
+                headers: {
+                    cookie: `token=${session.get("token")}`,
+                },
+                body: JSON.stringify({
+                    emoji: formData.get("emoji"),
+                }),
+                cache: "reload",
+            }
+        );
     }
 
     if (_action === "updateCard") {
         await fetch(
-            `http://localhost:8080/api/card/${formData.get("cardId")}`,
+            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+                "cardId"
+            )}`,
             {
                 method: "PUT",
                 headers: {
@@ -219,7 +228,9 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "updateCardText") {
         await fetch(
-            `http://localhost:8080/api/card/${formData.get("cardId")}`,
+            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+                "cardId"
+            )}`,
             {
                 method: "PUT",
                 headers: {
@@ -237,7 +248,75 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "deleteCard") {
         await fetch(
-            `http://localhost:8080/api/card/${formData.get("cardId")}`,
+            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+                "cardId"
+            )}`,
+            {
+                method: "DELETE",
+                headers: {
+                    cookie: `token=${session.get("token")}`,
+                },
+                credentials: "include",
+            }
+        );
+    }
+
+    if (_action === "createCard") {
+        await fetch("https://kanban-production-9b8e.up.railway.app/api/card/", {
+            method: "POST",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: formData.get("title"),
+                description: formData.get("description"),
+                listId: formData.get("listId"),
+                position: formData.get("position"),
+            }),
+            credentials: "include",
+        });
+    }
+
+    if (_action === "createList") {
+        await fetch("https://kanban-production-9b8e.up.railway.app/api/list/", {
+            method: "POST",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: formData.get("name"),
+                boardId: formData.get("boardId"),
+            }),
+            credentials: "include",
+        });
+    }
+
+    if (_action === "updateList") {
+        await fetch(
+            `https://kanban-production-9b8e.up.railway.app/api/list/${formData.get(
+                "listId"
+            )}`,
+            {
+                method: "PUT",
+                headers: {
+                    cookie: `token=${session.get("token")}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: formData.get("name"),
+                }),
+                credentials: "include",
+            }
+        );
+    }
+
+    if (_action === "deleteList") {
+        await fetch(
+            `https://kanban-production-9b8e.up.railway.app/api/list/${formData.get(
+                "listId"
+            )}`,
             {
                 method: "DELETE",
                 headers: {
@@ -337,6 +416,7 @@ const BoardPage = () => {
                 <Link to="/board">My boards</Link>
                 <Account user={user} />
             </Navbar>
+
             <DndContext sensors={[mouseSensor]} onDragEnd={handleDragEnd}>
                 <div className={styles.board}>
                     <BoardTile
@@ -355,6 +435,7 @@ const BoardPage = () => {
                                 cardsWithAssignee={cards[index]}
                             />
                         ))}
+                        <List boardId={board.id} new></List>
                     </div>
                 </div>
             </DndContext>

@@ -17,6 +17,7 @@ const Card = (props: CardProps) => {
             listId: props.card.listId,
             props: props,
         },
+        disabled: props.new,
     });
 
     const style = transform
@@ -49,106 +50,127 @@ const Card = (props: CardProps) => {
     };
 
     const [buttonVisible, setVisible] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     const fetcher = useFetcher();
 
     return (
-        <div
-            className={styles.card}
-            ref={setNodeRef}
-            style={style}
-            {...listeners}
-            {...attributes}
-            onMouseOver={() => setVisible(true)}
-            onMouseLeave={() => setVisible(false)}
-        >
-            <div className={styles.header}>
-                <Emoji
-                    unified={props.card.emoji ?? "1f4c4"}
-                    size={24}
-                    emojiStyle={EmojiStyle.TWITTER}
-                ></Emoji>
-                <ContentEditable
-                    onChange={(event) => setTitle(event.target.value)}
-                    onBlur={(event) => {
-                        if (
-                            titleRef.current != props.card.title ||
-                            descriptionRef.current != props.card.description
-                        ) {
+        <>
+            {!deleted ? (
+                <div
+                    className={styles.card}
+                    ref={setNodeRef}
+                    style={style}
+                    {...listeners}
+                    {...attributes}
+                    onMouseOver={() => setVisible(true)}
+                    onMouseLeave={() => setVisible(false)}
+                >
+                    <div className={styles.header}>
+                        <Emoji
+                            unified={props.card.emoji ?? "1f4c4"}
+                            size={24}
+                            emojiStyle={EmojiStyle.TWITTER}
+                        ></Emoji>
+
+                        <ContentEditable
+                            placeholder="Title"
+                            onChange={(event) => setTitle(event.target.value)}
+                            onBlur={() => {
+                                if (
+                                    (titleRef.current != props.card.title ||
+                                        descriptionRef.current !=
+                                            props.card.description) &&
+                                    !props.new
+                                ) {
+                                    fetcher.submit(
+                                        {
+                                            cardId: props.card.id.toString(),
+                                            title: titleRef.current,
+                                            description: descriptionRef.current,
+                                            _action: "updateCardText",
+                                        },
+                                        { method: "PUT" }
+                                    );
+                                }
+                            }}
+                            autoFocus
+                            html={title}
+                        />
+                    </div>
+                    <ContentEditable
+                        placeholder="Enter description..."
+                        className={styles.description}
+                        html={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        onBlur={() => {
+                            if (
+                                (titleRef.current != props.card.title ||
+                                    descriptionRef.current !=
+                                        props.card.description) &&
+                                !props.new
+                            ) {
+                                fetcher.submit(
+                                    {
+                                        cardId: props.card.id.toString(),
+                                        title: titleRef.current,
+                                        description: descriptionRef.current,
+                                        _action: "updateCardText",
+                                    },
+                                    { method: "PUT", replace: true }
+                                );
+                            }
+                        }}
+                    ></ContentEditable>
+                    <Button
+                        mini
+                        style={
+                            buttonVisible
+                                ? { display: "inline-flex" }
+                                : { display: "none" }
+                        }
+                        onClick={() => {
+                            if (props.new) {
+                                fetcher.submit(
+                                    {
+                                        title: title,
+                                        description: description,
+                                        listId: props.card.listId.toString(),
+                                        position:
+                                            props.card.position.toString(),
+                                        _action: "createCard",
+                                    },
+                                    { method: "POST" }
+                                );
+                                return;
+                            }
+
                             fetcher.submit(
                                 {
                                     cardId: props.card.id.toString(),
-                                    title: titleRef.current,
-                                    description: descriptionRef.current,
-                                    _action: "updateCardText",
+                                    _action: "deleteCard",
                                 },
-                                { method: "PUT" }
+                                { method: "DELETE" }
                             );
-                        }
-                    }}
-                    autoFocus
-                    html={title}
-                />
-            </div>
-            <ContentEditable
-                className={styles.description}
-                html={description}
-                onChange={(event) => setDescription(event.target.value)}
-                onBlur={() => {
-                    console.log(
-                        description,
-                        descriptionRef,
-                        props.card.description
-                    );
-                    if (
-                        titleRef.current != props.card.title ||
-                        descriptionRef.current != props.card.description
-                    ) {
-                        fetcher.submit(
-                            {
-                                cardId: props.card.id.toString(),
-                                title: titleRef.current,
-                                description: descriptionRef.current,
-                                _action: "updateCardText",
-                            },
-                            { method: "PUT" }
-                        );
-                    }
-                }}
-            ></ContentEditable>
-            <section className={styles.assignee}>
-                <img
-                    src={props.assignee?.avatarUrl ?? "/placeholder.png"}
-                    alt={`${props.assignee?.username}'s avatar`}
-                />
-                {props.assignee?.username}
-            </section>
-            <Button
-                mini
-                style={
-                    buttonVisible
-                        ? { display: "inline-flex" }
-                        : { display: "none" }
-                }
-                onClick={() =>
-                    fetcher.submit(
-                        {
-                            cardId: props.card.id.toString(),
-                            _action: "deleteCard",
-                        },
-                        { method: "DELETE" }
-                    )
-                }
-            >
-                <img src="/trash.svg" alt="Delete card" />
-            </Button>
-        </div>
+                            setDeleted(true);
+                        }}
+                    >
+                        <img
+                            src={props.new ? "/pencil.svg" : "/trash.svg"}
+                            alt="Delete card"
+                        />
+                        {props.new ? "Save" : ""}
+                    </Button>
+                </div>
+            ) : null}
+        </>
     );
 };
 
 interface CardProps {
     assignee?: IUser | null;
     card: ICard;
+    new?: boolean;
 }
 
 export default Card;

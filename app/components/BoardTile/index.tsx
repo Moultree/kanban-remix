@@ -1,8 +1,10 @@
 import EmojiPicker, { Emoji, EmojiStyle } from "emoji-picker-react";
 import Button from "../Button";
 import styles from "./style.module.css";
-import { Form, Link, useFetcher } from "@remix-run/react";
+import { Form, Link, useFetcher, useRouteLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import Popup from "reactjs-popup";
+import Input from "../Input";
 
 const BoardTile: React.FC<BoardTileProps> = (props: BoardTileProps) => {
     const [pickerVisibility, setVisibility] = useState<boolean>(false);
@@ -31,12 +33,46 @@ const BoardTile: React.FC<BoardTileProps> = (props: BoardTileProps) => {
     useOutsideRef(pickerRef);
     const fetcher = useFetcher();
 
+    const [open, setOpen] = useState(false);
+    const overlayStyle = { background: "rgba(0,0,0,0.5)" };
+
+    const [username, setUsername] = useState("");
+
     return (
         <div
             className={`${styles.tile} ${props.asHeader ? styles.page : ""} ${
                 props.editing ? styles.editing : ""
             }`}
         >
+            <Popup
+                open={open}
+                closeOnDocumentClick
+                onClose={() => setOpen(false)}
+                {...{ overlayStyle }}
+            >
+                <div className={styles.popup}>
+                    Enter username to invite:
+                    <Form>
+                        <Input
+                            placeholder="Username..."
+                            value={username}
+                            onChange={(event) =>
+                                setUsername(event.target.value)
+                            }
+                        ></Input>
+                        <Button
+                            onClick={() => {
+                                fetcher.load(
+                                    `/board/${props.id}/invite/${username}`
+                                );
+                            }}
+                        >
+                            Find
+                        </Button>
+                    </Form>
+                    {fetcher.data ? `/invite/${fetcher.data.text}` : ""}
+                </div>
+            </Popup>
             <header className={styles.header}>
                 <div
                     className={styles.icon}
@@ -104,7 +140,7 @@ const BoardTile: React.FC<BoardTileProps> = (props: BoardTileProps) => {
             {props.editing ? null : (
                 <section className={styles.buttons}>
                     <Form>
-                        <Button mini>
+                        <Button mini onClick={() => setOpen(true)}>
                             <img src="/person.plus.svg" alt="Invite" />
                             Invite
                         </Button>
@@ -113,7 +149,7 @@ const BoardTile: React.FC<BoardTileProps> = (props: BoardTileProps) => {
                         <Button
                             mini
                             name="_action"
-                            value="DELETE"
+                            value="delete"
                             aria-label="delete"
                         >
                             <img src="/trash.svg" alt="Delete" />

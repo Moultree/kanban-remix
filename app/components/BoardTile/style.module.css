@@ -97,3 +97,17 @@ h1 {
 .editing header {
     opacity: 0.6;
 }
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+
+    width: 300px;
+    height: 100px;
+    padding: 100px;
+
+    background: #fff;
+    border-radius: 6px;
+}

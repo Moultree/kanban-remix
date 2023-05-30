@@ -9,13 +9,16 @@ const action = async ({ request }: ActionArgs) => {
         throw new Error();
     }
 
-    const response = await fetch("http://localhost:8080/api/signout", {
-        method: "POST",
-        headers: {
-            cookie: `token=${session.get("token")}`,
-        },
-        cache: "no-store",
-    });
+    const response = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/signout",
+        {
+            method: "POST",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+            },
+            cache: "no-store",
+        }
+    );
 
     if (!response.ok) {
         throw new Error();

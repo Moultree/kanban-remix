@@ -20,20 +20,23 @@ const loader = async ({ request }: LoaderArgs) => {
         return redirect("/login");
     }
 
-    const boardsResponse = await fetch("http://localhost:8080/api/board/", {
-        method: "GET",
-        headers: {
-            cookie: `token=${session.get("token")}`,
-        },
-        credentials: "include",
-    });
+    const boardsResponse = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/board/",
+        {
+            method: "GET",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+            },
+            credentials: "include",
+        }
+    );
 
     let user = session.get("user");
     let boards = await boardsResponse.json();
 
     if (!user) {
         const userResponse = await fetch(
-            "http://localhost:8080/api/account/me",
+            "https://kanban-production-9b8e.up.railway.app/api/account/me",
             {
                 method: "GET",
                 headers: {
@@ -68,18 +71,21 @@ const action = async ({ request, params }: LoaderArgs) => {
     const data = await request.formData();
 
     if (request.method == "POST") {
-        await fetch("http://localhost:8080/api/board/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                cookie: `token=${session.get("token")}`,
-            },
-            body: JSON.stringify({
-                name: data.get("name")!,
-                authorId: session.get("user")?.id,
-            }),
-            credentials: "include",
-        });
+        await fetch(
+            "https://kanban-production-9b8e.up.railway.app/api/board/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    cookie: `token=${session.get("token")}`,
+                },
+                body: JSON.stringify({
+                    name: data.get("name")!,
+                    authorId: session.get("user")?.id,
+                }),
+                credentials: "include",
+            }
+        );
     }
 
     return redirect(".");

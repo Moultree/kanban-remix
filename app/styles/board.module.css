@@ -3,6 +3,7 @@
 }
 
 .lists {
+    overflow-x: scroll;
     display: flex;
     flex-direction: row;
     gap: 10px;

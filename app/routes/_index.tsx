@@ -18,12 +18,15 @@ const loader = async ({ request }: ActionArgs) => {
         return null;
     }
 
-    const response = await fetch("http://localhost:8080/api/account/me", {
-        method: "GET",
-        headers: {
-            cookie: `token=${session.get("token")}`,
-        },
-    });
+    const response = await fetch(
+        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        {
+            method: "GET",
+            headers: {
+                cookie: `token=${session.get("token")}`,
+            },
+        }
+    );
 
     return json<IUser>(await response.json());
 };

@@ -18,7 +18,7 @@ export interface ICard {
     id: number;
     title: string;
     description: string;
-    emoji: string;
+    emoji?: string;
     position: number;
     assigneeId: number;
     listId: number;

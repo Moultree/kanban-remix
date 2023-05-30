@@ -31,3 +31,49 @@
     background: #91918e;
     border-radius: 6px;
 }
+
+.new {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px 10px;
+
+    background: #fff;
+    filter: drop-shadow(0 4px 4px rgb(0 0 0 / 5%));
+    border: 1px solid rgb(0 0 0 / 10%);
+    border-radius: 6px;
+
+    transition: 100ms;
+}
+
+.new img {
+    opacity: 0.6;
+    transition: 100ms;
+}
+
+.new:hover {
+    border: 1px solid rgb(0 0 0 / 40%);
+}
+
+.new:hover img {
+    opacity: 1;
+}
+
+.list [placeholder]:empty::before {
+    content: attr(placeholder);
+    color: rgb(0 0 0 / 10%);
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+}
