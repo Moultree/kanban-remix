@@ -13,7 +13,7 @@ export const meta: V2_MetaFunction = () => {
 export async function action({ request }: ActionArgs) {
     const body = await request.formData();
     const response = await fetch(
-        "https://kanban-production-9b8e.up.railway.app/api/login",
+        "https://kanban-production-c773.up.railway.app/api/login",
         {
             method: "POST",
             headers: {

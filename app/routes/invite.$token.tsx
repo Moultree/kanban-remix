@@ -10,7 +10,7 @@ const loader = async ({ request, params }: LoaderArgs) => {
     }
 
     await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/board/invite/${params.token}`,
+        `https://kanban-production-c773.up.railway.app/api/board/invite/${params.token}`,
         {
             method: "POST",
             headers: {

@@ -29,7 +29,7 @@ const loadUserById = async (
     userId: number | string
 ): Promise<IUser> => {
     const response = await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/account/${userId}`,
+        `https://kanban-production-c773.up.railway.app/api/account/${userId}`,
         {
             method: "GET",
             headers: {
@@ -44,7 +44,7 @@ const loadUserById = async (
 
 const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
     const boardResponse = await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/board/${boardId}`,
+        `https://kanban-production-c773.up.railway.app/api/board/${boardId}`,
         {
             method: "GET",
             headers: {
@@ -64,7 +64,7 @@ const loadBoard = async (cookie: string, boardId: string): Promise<IBoard> => {
 
 const loadLists = async (cookie: string, boardId: string): Promise<IList[]> => {
     const listsResponse = await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/list/board/${boardId}`,
+        `https://kanban-production-c773.up.railway.app/api/list/board/${boardId}`,
         {
             method: "GET",
             headers: {
@@ -83,7 +83,7 @@ const loadCards = async (
     listId: string | number
 ): Promise<ICard[]> => {
     const cardsResponse = await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/card/list/${listId}`,
+        `https://kanban-production-c773.up.railway.app/api/card/list/${listId}`,
         {
             method: "GET",
             headers: {
@@ -99,7 +99,7 @@ const loadCards = async (
 
 const loadUser = async (cookie: string): Promise<IUser> => {
     const userResponse = await fetch(
-        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        "https://kanban-production-c773.up.railway.app/api/account/me",
         {
             method: "GET",
             headers: {
@@ -172,7 +172,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "delete") {
         const response = await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/board/${params.boardId}`,
+            `https://kanban-production-c773.up.railway.app/api/board/${params.boardId}`,
             {
                 method: "DELETE",
                 headers: {
@@ -192,7 +192,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "setEmoji") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/board/${params.boardId}`,
+            `https://kanban-production-c773.up.railway.app/api/board/${params.boardId}`,
             {
                 method: "PUT",
                 headers: {
@@ -208,7 +208,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "updateCard") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+            `https://kanban-production-c773.up.railway.app/api/card/${formData.get(
                 "cardId"
             )}`,
             {
@@ -228,7 +228,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "updateCardText") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+            `https://kanban-production-c773.up.railway.app/api/card/${formData.get(
                 "cardId"
             )}`,
             {
@@ -248,7 +248,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "deleteCard") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/card/${formData.get(
+            `https://kanban-production-c773.up.railway.app/api/card/${formData.get(
                 "cardId"
             )}`,
             {
@@ -262,7 +262,7 @@ const action = async ({ request, params }: LoaderArgs) => {
     }
 
     if (_action === "createCard") {
-        await fetch("https://kanban-production-9b8e.up.railway.app/api/card/", {
+        await fetch("https://kanban-production-c773.up.railway.app/api/card/", {
             method: "POST",
             headers: {
                 cookie: `token=${session.get("token")}`,
@@ -279,7 +279,7 @@ const action = async ({ request, params }: LoaderArgs) => {
     }
 
     if (_action === "createList") {
-        await fetch("https://kanban-production-9b8e.up.railway.app/api/list/", {
+        await fetch("https://kanban-production-c773.up.railway.app/api/list/", {
             method: "POST",
             headers: {
                 cookie: `token=${session.get("token")}`,
@@ -295,7 +295,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "updateList") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/list/${formData.get(
+            `https://kanban-production-c773.up.railway.app/api/list/${formData.get(
                 "listId"
             )}`,
             {
@@ -314,7 +314,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (_action === "deleteList") {
         await fetch(
-            `https://kanban-production-9b8e.up.railway.app/api/list/${formData.get(
+            `https://kanban-production-c773.up.railway.app/api/list/${formData.get(
                 "listId"
             )}`,
             {

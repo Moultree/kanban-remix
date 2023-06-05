@@ -11,7 +11,7 @@ const loader = async ({ request, params }: LoaderArgs) => {
     }
 
     const response = await fetch(
-        `https://kanban-production-9b8e.up.railway.app/api/board/${params.boardId}/invite/${params.username}`,
+        `https://kanban-production-c773.up.railway.app/api/board/${params.boardId}/invite/${params.username}`,
         {
             method: "GET",
             headers: {

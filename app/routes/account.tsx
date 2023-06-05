@@ -23,7 +23,7 @@ const action = async ({ request }: ActionArgs) => {
     }
 
     const response = await fetch(
-        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        "https://kanban-production-c773.up.railway.app/api/account/me",
         {
             method: "PUT",
             headers: {
@@ -59,7 +59,7 @@ const loader = async ({ request }: LoaderArgs) => {
     }
 
     const response = await fetch(
-        "https://kanban-production-9b8e.up.railway.app/api/account/me",
+        "https://kanban-production-c773.up.railway.app/api/account/me",
         {
             method: "GET",
             headers: {

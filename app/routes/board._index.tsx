@@ -21,7 +21,7 @@ const loader = async ({ request }: LoaderArgs) => {
     }
 
     const boardsResponse = await fetch(
-        "https://kanban-production-9b8e.up.railway.app/api/board/",
+        "https://kanban-production-c773.up.railway.app/api/board/",
         {
             method: "GET",
             headers: {
@@ -36,7 +36,7 @@ const loader = async ({ request }: LoaderArgs) => {
 
     if (!user) {
         const userResponse = await fetch(
-            "https://kanban-production-9b8e.up.railway.app/api/account/me",
+            "https://kanban-production-c773.up.railway.app/api/account/me",
             {
                 method: "GET",
                 headers: {
@@ -72,7 +72,7 @@ const action = async ({ request, params }: LoaderArgs) => {
 
     if (request.method == "POST") {
         await fetch(
-            "https://kanban-production-9b8e.up.railway.app/api/board/",
+            "https://kanban-production-c773.up.railway.app/api/board/",
             {
                 method: "POST",
                 headers: {
